@@ -1,0 +1,40 @@
+{
+    "terminal.explorerKind": "external",
+    "terminal.integrated.accessibleViewFocusOnCommandExecution": true,
+    "terminal.integrated.accessibleViewPreserveCursorPosition": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyleInactive": "line",
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.focusAfterRun": "terminal",
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.ignoreBracketedPasteMode": true,
+    "terminal.integrated.smoothScrolling": true,
+    "terminal.integrated.profiles.linux": {
+
+
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh"
+        },
+        "fish": {
+            "path": "fish"
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.tabs.defaultColor": "terminal.ansiCyan",
+    "css.format.braceStyle": "expand",
+    "livePreview.defaultPreviewPath": "/02-estrutura_de_dados/14-grocery-bud/setup/index.html"
+}

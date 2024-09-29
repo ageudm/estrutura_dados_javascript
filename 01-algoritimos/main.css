@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+body h2 {
+    font-size: 5rem;
+}
+
+.list-item {
+    font-size: 3rem;
+}
+
+.item {
+    margin-top: 3.5rem;
+}
