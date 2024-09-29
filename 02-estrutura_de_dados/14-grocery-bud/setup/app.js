@@ -13,8 +13,7 @@ let editFlag = false;
 let editID = "";
 
 
-// ****** FUNCTIONS **********
-
+// ****** FUNCTIONS *****************************************************************************************
 // Dcionar item
 let addItem = (e) => {
     e.preventDefault();
@@ -35,35 +34,8 @@ let addItem = (e) => {
 
     // forma simplificada da codição para add item na lista
     if(value && !editFlag) {
-        // criar alemento
-        const element = document.createElement('article')
-        element.classList.add('grocery-item')
-        // criar um atributo
-        const attr = document.createAttribute('data-id')
-        attr.value = id
-        // add atributo ao elemento
-        element.setAttributeNode(attr)
-        // add html ao article
-        element.innerHTML =
-        `<p class="title">${value}</p>
-            <div class="btn-container">
-              <button type="button" class="edit-btn">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button type="button" class="delete-btn">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>`;
-
-        // btn deletar item
-        const deleteBtn = element.querySelector('.delete-btn')
-        deleteBtn.addEventListener('click', deleteItem)
-        // btn editar item
-        const editbtn = element.querySelector('.edit-btn')
-        editbtn.addEventListener('click', editItem)
-
-        // add article na lista
-        list.appendChild(element);
+        // criar elemento
+        createItemList(id, value)
         // add alert success
         diplayAlert('Text adcionado', 'success')
         // show container
@@ -94,7 +66,8 @@ deleteItem = (e) => {
     const id = curentitem.dataset.id;
     // condição visual depois de remover todos item
     if(list.children.length === 0) {
-        container.classList.remove('show-container')
+        container.classList.remove('show-container');
+        localStorage.removeItem("list");
     }
 
     diplayAlert('Item removido', 'danger')
@@ -146,22 +119,53 @@ const clearAllitems  = () => {
     container.classList.remove('show-container');
     diplayAlert('Lista vasia', 'danger');
     setBackDefult();
+    localStorage.removeItem("list")
+}
 
+createItemList = (id, value) => {
+    // criar alemento
+    const element = document.createElement('article')
+    element.classList.add('grocery-item')
+    // criar um atributo
+    const attr = document.createAttribute('data-id')
+    attr.value = id
+    // add atributo ao elemento
+    element.setAttributeNode(attr)
+    // add html ao article
+    element.innerHTML =
+    `<p class="title">${value}</p>
+        <div class="btn-container">
+          <button type="button" class="edit-btn">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button type="button" class="delete-btn">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>`;
+
+    // btn deletar item
+    const deleteBtn = element.querySelector('.delete-btn')
+    deleteBtn.addEventListener('click', deleteItem)
+    // btn editar item
+    const editbtn = element.querySelector('.edit-btn')
+    editbtn.addEventListener('click', editItem)
+
+    // add article na lista
+    list.appendChild(element);
 }
 
 
-    // ****** EVENT LISTENERS **********
+    // ****** EVENT LISTENERS **********************************************************************************
 form.addEventListener('submit', addItem);
-clearBtn.addEventListener('click', clearAllitems)
+clearBtn.addEventListener('click', clearAllitems);
 
-// ****** LOCAL STORAGE **********
+
+// ****** LOCAL STORAGE ****************************************************************************************
 // add item na locala storage
 addToLocalStorage = (id, value) => {
     const grocery = {id, value};
     // pegar os dados da local storage
-    const items = localStorage.getItem("list") 
-    ? JSON.parse(localStorage.getItem("list"))
-    : [];
+    let items = getLocalStorage();
 
     // add items
     items.push(grocery);
@@ -169,13 +173,59 @@ addToLocalStorage = (id, value) => {
 
     console.log(items);
 }
+
 // remover item na local stoarge
 removeFromLocalStorage = (id) => {
-    console.log(id);
-}
-// editar conteudo na localaStorage
-editLocalStorage = (editID, value) => {}
+    let items = getLocalStorage();
 
+    // filrar item
+    items = items.filter((item) => {
+        if(item.id !== id) {
+            return item;
+        }
+    });
+
+    localStorage.setItem("list", JSON.stringify(items));
+}
+
+// editar conteudo na localaStorage
+editLocalStorage = (id, value) => {
+    let items = getLocalStorage();
+    items = items.map((item) => {
+        if(item.id === id) {
+            item.value = value;
+        }
+
+        return item;
+    })
+
+    localStorage.setItem("list", JSON.stringify(items));
+}
+
+getLocalStorage = () => {
+    const items = localStorage.getItem("list") 
+    ? JSON.parse(localStorage.getItem("list"))
+    : [];
+
+    return items;
+}
+
+// renderizar dados da local storage
+setupItems = () => {
+    let items = getLocalStorage();
+
+    if(items.length > 0) {
+        items.forEach((item) => {
+            createItemList(item.id, item.value)
+        })
+
+        container.classList.add('show-container')
+    }
+}
+
+window.addEventListener('DOMContentLoaded', setupItems);
+
+//LOGICA DA LOCAL STORAGE
 // localStorage.setItem('pessoa', JSON.stringify([{name: 'ageu'}, {idade: 23}]))
 // const pessoa = JSON.parse(localStorage.getItem('pessoa'))
 // console.log(pessoa);
@@ -185,6 +235,6 @@ editLocalStorage = (editID, value) => {}
 
 
 // ===========FAZER TESTE DA LOGICA ========================
-let logicTest1 = Boolean(grocery.value && !editFlag)
-let logicTest2 = Boolean(grocery.value && editFlag)
-console.log(logicTest2);
+// let logicTest1 = Boolean(grocery.value && !editFlag)
+// let logicTest2 = Boolean(grocery.value && editFlag)
+// console.log(logicTest2);
