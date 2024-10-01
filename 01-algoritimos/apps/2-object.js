@@ -1,8 +1,8 @@
 /**************************************************************************************
-  ALGORITIMOS SIMPLES PARA MANIPULAR OBJECTOS
+  ALGORITIMOS SIMPLES PARA MANIPULAR OBJECTOS LITERAL
 ***************************************************************************/
 
-//inicializar um objecto
+//inicializar um objecto literal
 const product = {
     nome: 'Ananas',
     price: 50,
@@ -76,7 +76,7 @@ console.log('avaliaçã3: ',avaliar3);
 /**************************************************************************************
   LISTAR AS PROP DE UM OBJECTO
 ***************************************************************************/
-//formas de herdar as props de um objecto
+//Erdar props de um ojecto
 const {nome, price, other, fun} = product;
 
 const obj4 = {
@@ -102,3 +102,111 @@ console.log(obj4);
 console.log(obj5);
 console.log(obj5.fun());
 console.log(obj4.pagar());
+
+
+/**************************************************************************************
+  CRIAR OBJECTO COM FUNCÇÃO FATORIAL
+***************************************************************************/
+
+const productData = (nome, price, stars, count) => {
+  return {
+    nome,
+    price,
+    other: {
+        stars,
+        count
+    },
+    fun: () => {
+        console.log('add to cart');
+    }
+
+  };
+}
+
+// criar a instancia do objecto
+const produto1 = productData('Banana', 50, 4.5, 20);
+
+console.log(produto1.nome);
+console.log(produto1.fun());
+
+
+/**************************************************************************************
+  OBJECTO CONSTRUTOR
+***************************************************************************/
+
+function Produto(name, price, stars, count){
+  this.name = name;
+  this.price = price;
+  this.other = {
+    stars: stars,
+    count: count
+  };
+  this.fun = () => {
+    console.log('add to cart');
+  }
+}
+
+// criar uma nova instancia do objecto
+const produto2 = new Produto('Funge', 20, 3, 8 );
+delete produto2.count; //deletar pro no objecto
+produto2.marca = 'gricel'; //add prop no objecto
+console.log(produto2);
+
+//passar variavel como argumento
+const productName = 'Quisaca';
+const produto3 = new Produto(productName, 20, 3, 8 );
+console.log(produto3);
+
+//verificar as propriedades do ojecto com o iteração
+for (key in produto2) {
+  console.log(key, produto2[key]);
+}
+
+for (key in produto2) {
+  if (typeof produto2[key] !== 'function')
+    console.log(key, produto2[key]);
+}
+
+//vericar as props com a o nativo Object
+const keys = Object.keys(produto3)
+console.log(keys);
+
+//verificar a existencia da prop no objecto
+if ('fun' in produto2) {
+  console.log('existe o metodo fun em produto2');
+} else {
+  console.log('esteme metodo não existe');
+}
+
+
+
+/**************************************************************************************
+  //Criar instancia de objecto com o metodo (call)
+***************************************************************************/
+function Food(name, price, stars, count) {
+  Produto.call(this, name, price, stars, count);
+  this.categoria = 'Alimentos';
+  this.com = () => {
+    console.log('comprar');
+  };
+}; Food.prototype = Object.create(Produto.prototype)
+
+const food = new Food('Arros', 1000, 3.5, 500);
+console.log(food);
+
+/**************************************************************************************
+//Criar instancia de objecto com o metodo (apply)
+***************************************************************************/
+function Food2(name, price, stars, count) {
+  Produto.apply(this, [name, price, stars, count]);
+  this.categoria = 'Alimentos';
+  this.com = () => {
+    console.log('comprar');
+  };
+}; Food2.prototype = Object.create(Produto.prototype)
+
+const food2 = new Food('Açucar', 5000, 3.5, 500);
+console.log(food2);
+console.log(food2.fun());
+
+
