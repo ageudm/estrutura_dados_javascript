@@ -11,6 +11,12 @@
             "name": "http://127.0.0.1:3000/01-algoritimos/8-array-render-method.html",
             "request": "launch",
             "url": "http://127.0.0.1:3000/01-algoritimos/8-array-render-method.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01-algoritimos/2-object.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01-algoritimos/2-object.html"
         }
     ]
 }

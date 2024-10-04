@@ -39,7 +39,7 @@ btn.addEventListener('click', () => {
   EVNTOS DO TECLADO
 ***************************************************************************/
 
-/****Caoiturar o evento e a prop da tecla
+/****Capiturar o evento e a prop da tecla
  * event.key
 */
 
