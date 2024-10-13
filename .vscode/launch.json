@@ -17,6 +17,18 @@
             "name": "http://127.0.0.1:3000/01-algoritimos/2-object.html",
             "request": "launch",
             "url": "http://127.0.0.1:3000/01-algoritimos/2-object.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01-algoritimos/async-aweit.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01-algoritimos/async-aweit.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01-algoritimos/11-modules.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01-algoritimos/11-modules.html"
         }
     ]
 }
